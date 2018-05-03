@@ -29,7 +29,7 @@ class Student
   def self.read_all()
     sql = "SELECT * FROM students"
     result = SqlRunner.run(sql)
-    build_results(results)
+    build_results(result)
   end
 
   def self.read_by_id(id)
