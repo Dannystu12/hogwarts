@@ -26,5 +26,22 @@ class Student
     SqlRunner.run(sql)
   end
 
+  def self.read_all()
+    sql = "SELECT * FROM students"
+    result = SqlRunner.run(sql)
+    build_results(results)
+  end
+
+  def self.read_by_id(id)
+    sql = "SELECT * FROM students WHERE id = $1 LIMIT  1"
+    result =  SqlRunner.run(sql,[id])
+    return build_results(result)[0]
+
+  end
+
+  private
+  def self.build_results(results, type=self)
+    return results.map{|hash| type.new(hash)}
+  end
 
 end
